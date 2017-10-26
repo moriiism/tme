@@ -1,4 +1,3 @@
-
 include ../../mitool/Makefile.in
 include ../../mitool/milib/Makefile.in
 include ../../mitool/miblaslib/Makefile.in
@@ -8,20 +7,6 @@ include ../../mitool/mirootlib/Makefile.in
 INCLUDE = $(MIFITSLIB_INC) $(MIBLASLIB_INC) $(MILIB_INC) $(CFITSIO_INC) $(MT_INC)
 LDLIBS  = $(MIFITSLIB_LIB) $(MIBLASLIB_LIB) $(MILIB_LIB) $(CFITSIO_LIB) \
 	$(LAPACK_LIB) $(BLAS_LIB) $(MT_LIB) $(LIB)
-
-#INCLUDE = $(TMELIB_INC) $(CFITSIO_INC) $(MT_INC)
-#LDLIBS  = $(TMELIB_LIB) $(CFITSIO_LIB) ${LAPACK_LIB} $(BLAS_LIB) $(MT_LIB) $(LIB)
-
-#INCLUDE = $(TMELIB_INC) $(CFITSIO_INC) $(MT_INC)
-#LDLIBS  = $(TMELIB_LIB) $(CFITSIO_LIB) ${OPENBLAS_LIB} $(MT_LIB) $(LIB)
-
-#INCLUDE = $(TMELIB_INC) $(CFITSIO_INC) $(MT_INC)
-#LDLIBS  = $(TMELIB_LIB) $(CFITSIO_LIB) ${GOTOBLAS2_LIB} $(MT_LIB) $(LIB)
-
-# ${LAPACK_LIB} 
-
-#INCLUDE = $(TMELIB_INC) $(CFITSIO_INC) $(MT_INC)
-#LDLIBS  = $(TMELIB_LIB) $(CFITSIO_LIB) ${GOTOBLAS2_LIB} $(MT_LIB) $(LIB)
 
 TARGET = tmegodec  tmegodec_4d
 

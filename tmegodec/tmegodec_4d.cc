@@ -43,10 +43,8 @@ int main(int argc, char* argv[])
 
     int bitpix = 0;
     double* X_mat = NULL;
-    //int status = MifFits::InFitsCubeD(argval->GetInFile(),
-    //                                  img_info, &bitpix, &X_mat);
-    int status = MifFits::InFits4dD(argval->GetInFile(),
-                                    img_info, &bitpix, &X_mat);
+    MifFits::InFits4dD(argval->GetInFile(),
+                       img_info, &bitpix, &X_mat);
 
     double* S_mat = NULL;
     double* L_mat = NULL;
