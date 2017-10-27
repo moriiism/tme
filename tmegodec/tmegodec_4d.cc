@@ -38,8 +38,9 @@ int main(int argc, char* argv[])
     img_info->Load(argval->GetSubcube());
     img_info->PrintInfo();
     printf("=== img_info ===\n");
-    printf("sparsity ratio = ncard / npixel = %e\n",
-           (double) argval->GetNcard() / (double)(img_info->GetNpixelImg() * img_info->GetNaxesArrElm(2)) );
+    MiIolib::Printf2(fp_log, "sparsity ratio = ncard / npixel = %e\n",
+                     (double) argval->GetNcard() /
+                     (double)(img_info->GetNpixelImg() * img_info->GetNaxesArrElm(2)) );
 
     int bitpix = 0;
     double* X_mat = NULL;
