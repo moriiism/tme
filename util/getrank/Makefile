@@ -1,0 +1,37 @@
+include ../../../mitool/Makefile.in
+include ../../../mitool/milib/Makefile.in
+include ../../../mitool/miblaslib/Makefile.in
+include ../../../mitool/mifitslib/Makefile.in
+include ../../../mitool/mirootlib/Makefile.in
+
+INCLUDE = $(MIFITSLIB_INC) $(MIBLASLIB_INC) $(MILIB_INC) $(CFITSIO_INC) $(MT_INC)
+LDLIBS  = $(MIFITSLIB_LIB) $(MIBLASLIB_LIB) $(MILIB_LIB) $(CFITSIO_LIB) \
+	$(LAPACK_LIB) $(BLAS_LIB) $(MT_LIB) $(LIB)
+
+TARGET = getrank
+
+all: $(TARGET) 
+
+getrank: getrank.o  arg_getrank.o
+	$(CXXN) $@.o arg_$@.o ${LDLIBS} -o $@
+
+.SUFFIXES:
+.SUFFIXES: .o .c .f .F .cc
+
+.c.o:
+	$(CCN) -c $<
+
+.F.o : 
+	$(FCN) -c $<
+
+.f.o:
+	$(FCN) -c $<
+
+.cc.o:
+	${CXXN} -c $<
+
+clean:
+	-rm -f *.o
+
+cleaner: clean
+	-rm -f ${TARGET} *% *~ core
