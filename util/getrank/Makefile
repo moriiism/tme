@@ -4,8 +4,8 @@ include ../../../mitool/miblaslib/Makefile.in
 include ../../../mitool/mifitslib/Makefile.in
 include ../../../mitool/mirootlib/Makefile.in
 
-INCLUDE = $(MIFITSLIB_INC) $(MIBLASLIB_INC) $(MILIB_INC) $(CFITSIO_INC) $(MT_INC)
-LDLIBS  = $(MIFITSLIB_LIB) $(MIBLASLIB_LIB) $(MILIB_LIB) $(CFITSIO_LIB) \
+INCLUDE = $(MIROOTLIB_INC) $(MIFITSLIB_INC) $(MIBLASLIB_INC) $(MILIB_INC) $(ROOT_INC) $(CFITSIO_INC) $(MT_INC)
+LDLIBS  = $(MIROOTLIB_LIB) $(MIFITSLIB_LIB) $(MIBLASLIB_LIB) $(MILIB_LIB) $(ROOT_ALLLIBS) $(CFITSIO_LIB) \
 	$(LAPACK_LIB) $(BLAS_LIB) $(MT_LIB) $(LIB)
 
 TARGET = getrank

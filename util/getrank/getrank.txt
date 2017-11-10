@@ -1,0 +1,18 @@
+#
+# getrank.txt
+#
+
+source ~/work/github/moriiism/tme/setup/setup.sh 
+
+infile=../17103001/out/test/hz6/source_spw2_20km/r050/n1.0e+06/out_L_S.txt
+significance=2.0
+nclip=30
+outdir=getrank/test/hz6/source_spw2_20km/r050/n1.0e+06/out_L_S
+outfile_head=out
+
+/home/morii/work/github/moriiism/tme/util/getrank/getrank \
+${infile} \
+${significance} \
+${nclip} \
+${outdir} \
+${outfile_head}

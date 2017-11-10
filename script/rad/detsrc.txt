@@ -1,0 +1,24 @@
+#
+# detsrc.txt
+#
+
+source ~/work/github/moriiism/tme/setup/setup.sh 
+
+mkdir setup
+ls -1 ../../data/cubefits/test/*/*.fits > setup/fits.list
+cat << EOF > setup/subcube.dat
+#  x(pixel)  y(pixel)  freq(frame) 4d
+  1    1     1    1
+320  320   100    1
+EOF
+
+
+
+/home/morii/work/ohuchi/ana/17103001/bin/godec.pl \
+setup/fits.list \
+setup/subcube.dat
+
+
+
+
+
