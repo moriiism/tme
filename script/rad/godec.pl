@@ -55,7 +55,7 @@ $mipllib::sevar{'progname'} = "godec.pl";
 	my $in_file = $line;
 
 	# parse
-	my $index_st = index($in_file, "test");
+	my $index_st = index($in_file, "sample");
 	my $index_ed = index($in_file, ".fits");
 	my $file_name_last = substr($in_file, $index_st, $index_ed - $index_st);
 

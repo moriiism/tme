@@ -110,37 +110,38 @@ $mipllib::sevar{'progname'} = "detsrc.pl";
 	    system($cmd);
 	}
 
-	### milcsmooth
-	open(OUT, ">setup/func_par.dat");
-	printf(OUT "## name  par\n");
-	printf(OUT "mu_xp        0\n");
-	printf(OUT "sigma_xp     2\n");
-	printf(OUT "norm         1\n");
-	close(OUT);
+#	### milcsmooth
+#	open(OUT, ">setup/func_par.dat");
+#	printf(OUT "## name  par\n");
+#	printf(OUT "mu_xp        0\n");
+#	printf(OUT "sigma_xp     2\n");
+#	printf(OUT "norm         1\n");
+#	close(OUT);
+#
+#	{
+#	    for(my $irank = 0; $irank < $nrank; $irank ++){
+#		my $infile = sprintf("imgline/%s/out_row_hd1d_%3.3d.dat", $midname, $irank);
+#		my $infile_mask = sprintf("zeroline/%s/out_mask1d_hd1d.dat", $midname);
+#		my $func = "Gauss1dFunc";
+#		my $par_file = "setup/func_par.dat";
+#		my $nbin_kernel_half = 10;
+#		my $outdir = sprintf("lcsmooth/%s/r%3.3d", $midname, $irank);
+#		my $outfile_head = "out";
+#
+#		$cmd = sprintf("/home/morii/work/github/moriiism/mitool/miutil/milcsmooth/milcsmooth " .
+#			       "%s  %s  %s  %s  " .
+#			       "%d  %s  %s" ,
+#			       $infile, $infile_mask, $func, $par_file,
+#			       $nbin_kernel_half, $outdir, $outfile_head);
+#		printf("cmd = %s\n", $cmd);
+#		system($cmd);
+#	    }
+#	}
 
 	{
 	    for(my $irank = 0; $irank < $nrank; $irank ++){
+		# my $infile = sprintf("lcsmooth/%s/r%3.3d/out_smooth.dat", $midname, $irank);
 		my $infile = sprintf("imgline/%s/out_row_hd1d_%3.3d.dat", $midname, $irank);
-		my $infile_mask = sprintf("zeroline/%s/out_mask1d_hd1d.dat", $midname);
-		my $func = "Gauss1dFunc";
-		my $par_file = "setup/func_par.dat";
-		my $nbin_kernel_half = 10;
-		my $outdir = sprintf("lcsmooth/%s/r%3.3d", $midname, $irank);
-		my $outfile_head = "out";
-
-		$cmd = sprintf("/home/morii/work/github/moriiism/mitool/miutil/milcsmooth/milcsmooth " .
-			       "%s  %s  %s  %s  " .
-			       "%d  %s  %s" ,
-			       $infile, $infile_mask, $func, $par_file,
-			       $nbin_kernel_half, $outdir, $outfile_head);
-		printf("cmd = %s\n", $cmd);
-		system($cmd);
-	    }
-	}
-
-	{
-	    for(my $irank = 0; $irank < $nrank; $irank ++){
-		my $infile = sprintf("lcsmooth/%s/r%3.3d/out_smooth.dat", $midname, $irank);
 		my $infile_mask = sprintf("zeroline/%s/out_mask1d_hd1d.dat", $midname);
 		my $significance_src = 5.0;
 		my $significance_bg = 2.0;
@@ -242,6 +243,47 @@ $mipllib::sevar{'progname'} = "detsrc.pl";
 		system($cmd);
 	    }
 	}
+
+	# merge img & lc
+	{
+	    for(my $irank = 0; $irank < $nrank; $irank ++){
+		my $img_src = sprintf("imgsig/%s/r%3.3d/out_src.txt", $midname, $irank);
+		if(! -e $img_src){
+		    next;
+		}
+		my $wcout = `wc $img_src`;
+		my @wc_arr = split(' ', $wcout);
+		if(0 == $wc_arr[0]){
+		    next;
+		}
+
+		my $lc_src = sprintf("getsig/%s/r%3.3d/out_src.txt", $midname, $irank);
+		if(! -e $lc_src){
+		    next;
+		}
+		$wcout = `wc $lc_src`;
+		@wc_arr = split(' ', $wcout);
+		if(0 == $wc_arr[0]){
+		    next;
+		}
+		
+		my $outdir = sprintf("imglc/%s/r%3.3d", $midname, $irank);
+		$cmd = sprintf("mkdir -p %s", $outdir);
+		printf("cmd = %s\n", $cmd);
+		system($cmd);
+
+		my $outimg = sprintf("%s/img_src.txt", $outdir);
+		$cmd = sprintf("cp %s %s", $img_src, $outimg); 
+		printf("cmd = %s\n", $cmd);
+		system($cmd);
+
+		my $outlc = sprintf("%s/lc_src.txt", $outdir);
+		$cmd = sprintf("cp %s %s", $lc_src, $outlc); 
+		printf("cmd = %s\n", $cmd);
+		system($cmd);
+	    }
+	}
+
     }
     close(LIST);
 

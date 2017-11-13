@@ -1,5 +1,5 @@
 LIBS = 
-BINS = tmegodec 
+BINS = tmegodec  util
 
 SUBDIRS = $(LIBS) $(BINS) setup
 
