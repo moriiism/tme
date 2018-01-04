@@ -1,0 +1,27 @@
+#
+# godec.txt
+#
+
+source /home/morii/work/github/moriiism/tme/setup/setup.sh
+
+mkdir setup
+ls -1 ../../data/cubefits/test/*/*.fits > setup/fits.list
+cat << EOF > setup/subcube.dat
+#  x(pixel)  y(pixel)  freq(frame) 4d
+  1    1     1    1
+320  320   100    1
+EOF
+
+filelist=setup/fits.list
+subcube=setup/subcube.dat
+nrank=50
+ncard=1.0e6
+outdir=godec
+
+/home/morii/work/github/moriiism/tme/script/rad/godec.pl \
+${filelist} \
+${subcube} \
+${nrank} \
+${ncard} \
+${outdir}
+

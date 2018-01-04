@@ -1,4 +1,4 @@
-BINS =  getrank
+BINS =  getrank  fits  mergeimgrank  mergelcrank
 
 SUBDIR = $(BINS)
 

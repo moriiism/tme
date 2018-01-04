@@ -1,0 +1,25 @@
+#
+# mergelcrank.txt
+#
+
+source ~/work/github/moriiism/tme/setup/setup.sh 
+
+
+cat << EOF > setup/imgline.list
+imgline/test/hz6/source_spw2_20km/r039/n1.0e+06/out_row_hd1d_000.dat
+imgline/test/hz6/source_spw2_20km/r039/n1.0e+06/out_row_hd1d_001.dat
+EOF
+
+hd1d_list=setup/imgline.list
+sv_dat=out/test/hz6/source_spw2_20km/r039/n1.0e+06/out_L_S.txt
+nrank=2
+outdir=temp/mergelcrank
+outfile_head=mergelc
+
+/home/morii/work/github/moriiism/tme/util/mergelcrank/mergelcrank \
+${hd1d_list} \
+${sv_dat} \
+${nrank} \
+${outdir} \
+${outfile_head}
+
